@@ -1,0 +1,121 @@
+/**************************************************\
+|* Style Author: Djordje Jocic                    *|
+|* Style Year: 2016                               *|
+|* Official Website: http://www.djordjejocic.com/ *|
+\**************************************************/
+
+/* Core */
+
+.infinity-header {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+.infinity-row {
+    margin: 0 0 5px 0;
+}
+
+.infinity-input-wrapper {
+    padding: 0 10px 0 0;
+}
+
+.infinity-input {
+    width: 100%;
+}
+
+.infinity-btn {
+    height: 14px;
+    width: 14px;
+    display: block;
+    float: left;
+    margin: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+/* Add Button */
+
+.infinity-btn-add {
+    background: url(../img/add.png) 0 0 no-repeat;
+}
+
+.infinity-btn-add:hover {
+    background: url(../img/add.png) -14px 0 no-repeat;
+}
+
+/* Remove Button */
+
+.infinity-btn-remove {
+    background: url(../img/remove.png) 0 0 no-repeat;
+}
+
+.infinity-btn-remove:hover {
+    background: url(../img/remove.png) -14px 0 no-repeat;
+}
+
+/* Columns */
+
+.infinity-col-1 {
+    width: 8.333333333%;
+    float: left;
+}
+
+.infinity-col-2 {
+    width: 16.666666667%;
+    float: left;
+}
+
+.infinity-col-3 {
+    width: 25%;
+    float: left;
+}
+
+.infinity-col-4 {
+    width: 33.333333333%;
+    float: left;
+}
+
+.infinity-col-5 {
+    width: 41.666666667%;
+    float: left;
+}
+
+.infinity-col-6 {
+    width: 50%;
+    float: left;
+}
+
+.infinity-col-7 {
+    width: 58.333333333%;
+    float: left;
+}
+
+.infinity-col-8 {
+    width: 66.666666667%;
+    float: left;
+}
+
+.infinity-col-9 {
+    width: 75%;
+    float: left;
+}
+
+.infinity-col-10 {
+    width: 83.333333333%;
+    float: left;
+}
+
+.infinity-col-11 {
+    width: 91.666666667%;
+    float: left;
+}
+
+.infinity-col-12 {
+    width: 100%;
+    float: left;
+}
+
+/* Other */
+
+.infinity-clear {
+    clear: both;
+}
