@@ -19,37 +19,43 @@
     padding: 0 10px 0 0;
 }
 
-.infinity-input {
-    width: 100%;
-}
-
 .infinity-btn {
     height: 14px;
     width: 14px;
-    display: block;
-    float: left;
+    display: inline-block;
     margin: 5px 5px 0 0;
     cursor: pointer;
 }
 
-/* Add Button */
+.infinity-btn:hover {
+    opacity: 0.9;
+}
+
+/* Buttons */
 
 .infinity-btn-add {
-    background: url(../img/add.png) 0 0 no-repeat;
+    background: url(../img/buttons.png) 0 0 no-repeat;
 }
-
-.infinity-btn-add:hover {
-    background: url(../img/add.png) -14px 0 no-repeat;
-}
-
-/* Remove Button */
-
 .infinity-btn-remove {
-    background: url(../img/remove.png) 0 0 no-repeat;
+    background: url(../img/buttons.png) -14px 0 no-repeat;
 }
 
-.infinity-btn-remove:hover {
-    background: url(../img/remove.png) -14px 0 no-repeat;
+
+/* Inputs */
+
+.infinity-object {
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+
+input.infinity-object {
+    width: 95%;
+}
+
+textarea.infinity-object {
+    width: 95%;
+    resize: vertical;
 }
 
 /* Columns */
@@ -115,6 +121,18 @@
 }
 
 /* Other */
+
+.infinity-left {
+    text-align: left;
+}
+
+.infinity-center {
+    text-align: center;
+}
+
+.infinity-right {
+    text-align: right;
+}
 
 .infinity-clear {
     clear: both;

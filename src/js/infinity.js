@@ -34,13 +34,174 @@
 |* SOFTWARE.                                      *|
 \**************************************************/
 
+// Infinity Logic.
+
+function InfinityRenderer() {
+    
+    this.addHeader = function(element, settings) {
+        
+        // Create Fields.
+        
+        var fields = "";
+        
+        $.each(settings.fields, function(index, value) {
+            
+            fields += "<div class='infinity-col-" + value.size + "'>" + value.title + "</div>";
+            
+        });
+        
+        fields += "<div class='infinity-clear'></div>";
+        
+        // Create Header.
+        
+        var header = "<div class='infinity-header'>" +
+                            "<div class='input-column infinity-col-" + settings.inputs.size + " infinity-" + settings.inputs.align + "'>" + fields + "</div>" +
+                            "<div class='options-column infinity-col-" + settings.options.size + " infinity-" + settings.options.align + "'>" + settings.options.title +"</div>" +
+                            "<div class='infinity-clear'></div>" +
+                        "</div>";
+        
+        element.append(header);
+        
+    };
+    
+    this.addRow = function(position, element, settings) {
+        
+        var that = this;
+        
+        // Create Fields.
+        
+        var fields = "";
+        
+        $.each(settings.fields, function(index, value) {
+            
+            fields += "<div class='infinity-col-" + value.size + "'>" + that.createInput(value.type) + "</div>";
+            
+        });
+        
+        fields += "<div class='infinity-clear'></div>";
+        
+        // Create Options.
+        
+        var options = "<a class='infinity-btn infinity-btn-add' title='Add' href='#'></a>" +
+                      "<a class='infinity-btn infinity-btn-remove' title='Remove' href='#'></a>" +
+                      "<div cass='infinity-clear'></div>";
+        
+        // Create Row.
+        
+        var row = "<div class='infinity-row'>" +
+                      "<div class='input-column infinity-col-" + settings.inputs.size + " infinity-" + settings.inputs.align + "'>" + fields + "</div>" +
+                      "<div class='options-column infinity-col-" + settings.options.size + " infinity-" + settings.options.align + "'>" + options +"</div>" +
+                      "<div class='infinity-clear'></div>" +
+                  "</div>";
+        
+        element.append(row);
+        
+    };
+    
+    this.createInput = function(inputType) {
+        
+        if (inputType === "textarea") {
+            
+            return "<textarea class='infinity-object infinity-textarea'></textarea>";
+            
+        }
+        
+        return "<input class='infinity-object infinity-input' />";
+    };
+    
+    this.handleValues = function() {
+        
+        
+        
+    };
+    
+}
+
 // Extending JQuery.
 
 (function($) {
     
+    // Data Needed For The Library To Work.
+    
+    $.fn.infinityCore = {
+        renderer : new InfinityRenderer()
+    };
+    
     // JQuery Infinity Function (Used For Initialization).
     
     $.fn.infinity = function(settings) {
+        
+        // Get Element & Element Settings.
+        
+        var element         = $(this);
+        var elementSettings = $(this).data("infinitySettings");
+        
+        // Handle Settings.
+        
+        if (typeof elementSettings === "undefined") {
+            
+            if (typeof settings === "undefined") { // Generate Default Settings.
+                
+                settings = {
+                    fields : [
+                        { title : "Input", type : "input", size : "12" }
+                    ],
+                    inputs : { align : "left" },
+                    options : { title : "Options", size : "3", align : "left" }
+                };
+                
+            }
+            else { // Check Provided Settings.
+                
+                
+                
+            }
+            
+            settings.inputs.size = 12 - settings.options.size;
+            
+            element.data("infinitySettings", settings);
+            
+            elementSettings = settings;
+            
+        }
+        
+        // Initialize Plugin.
+        
+        if (typeof elementSettings.infinityInit === "undefined") {
+            
+            // Create Initial Content
+            
+            $.fn.infinityCore.renderer.addHeader(element, elementSettings);
+            $.fn.infinityCore.renderer.addRow(0, element, elementSettings);
+            
+            // Add Required Events.
+            
+            element.on("click", ".infinity-btn-add", function(e) {
+                
+                
+                
+                e.preventDefault();
+                
+            });
+            element.on("click", ".infinity-btn-remove", function(e) {
+                
+                
+                
+                e.preventDefault();
+                
+            });
+            
+            // Toggle Initialization Flag.
+            
+            elementSettings.infinityInit = true;
+            
+            element.data("infinitySettings", elementSettings);
+            
+        }
+        
+    };
+    
+    $.fn.infinityOld = function(settings) {
         
         // Get Element & Element Settings.
         

@@ -1,0 +1,56 @@
+/**************************************************\
+|* Style Author: Djordje Jocic                    *|
+|* Style Year: 2016                               *|
+|* Official Website: http://www.djordjejocic.com/ *|
+\**************************************************/
+
+/* Core */
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background: #fff;
+    color: #222;
+    font-family: sans-serif;
+    min-width: 480px;
+}
+
+h1
+{
+    font-size: 18px;
+    padding: 0 0 2px 0;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #222;
+}
+
+.example
+{
+    padding: 50px;
+    margin: 0 0 150px 0;
+    position: relative;
+}
+
+.example .parse-options
+{
+    position: absolute;
+    top: 45px;
+    right: 50px;
+}
+
+.example textarea.result
+{
+    width: 100%;
+    height: 150px;
+}
+
+/* Other */
+
+.no-margin
+{
+    margin: 0;
+}
