@@ -4,7 +4,17 @@ jQuery Infinity is a library that allows users to add and process infinite numbe
 
 ![Basic Example](demo/img/example.gif)
 
-It allows you to parse the fields to plaintext, json and xml format but it also allows you to use your own parsing functions.
+Library used with jsGrid.
+
+![jsGrid Example](demo/img/jsgrid-example.png)
+
+Library allows you to parse the fields to:
+
+* Plaintext
+* JSON
+* XML
+
+It is also possible to write and use custom parsing functions.
 
 # Versioning Scheme
 
@@ -47,8 +57,12 @@ $("#my-container").infinity({
 ```js
 $("#my-container").infinity({
     fields : [
-        { title : "Name", type : "input", size : "3" },
-        { title : "Description", type : "textarea", size : "9" }
+        { title : "Product", type : "input", size : "3" },
+        { title : "Description", type : "textarea", size : "7" },
+        { title : "Shipping", type : "select", size : "2", options : [
+            { text : "Included", value : "Yes"  },
+            { text : "Excluded", value : "No" }
+        ] }
     ]
 });
 ```
@@ -143,10 +157,11 @@ var settings = {
 
 Allowed values are as follow:
 
-* fields - Array containing objects, ex. *{ title : "Input", type "input", size : "12" }*
+* fields - Array containing objects, ex. *{ title : "Input", type "input", size : "12", options : null }*
     * object.title - Any string
-    * object.type - String with value *input* or *textarea*
+    * object.type - String with value *input*, *textarea* or *select*
     * object.size - String or a number from 1 to 12 since Infinity uses a 12 grid layout
+    * object.options - Array containing parameters for a select field, ex. *[ { text : "Yes", value : "1"  }, { text : "No", value : "0" } ]*
 * values - Array or a 2D array containing your desired values, ex. *[ 1, 2, 3, 4 ]*
 * inputs - Object containing field parameters
     * object.id - Name of the fields, ex. *products*

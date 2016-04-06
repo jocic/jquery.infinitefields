@@ -16,7 +16,7 @@
 }
 
 .infinity-input-wrapper {
-    padding: 0 20px 0 0;
+    padding: 0;
 }
 
 .infinity-btn {
@@ -57,7 +57,7 @@ input.infinity-object {
 }
 
 textarea.infinity-object {
-    width: 95%;
+    width: 100%;
     resize: vertical;
 }
 
@@ -129,12 +129,24 @@ textarea.infinity-object {
     text-align: left;
 }
 
+.infinity-left .infinity-input-wrapper {
+    padding: 0 20px 0 0;
+}
+
 .infinity-center {
     text-align: center;
 }
 
+.infinity-center .infinity-input-wrapper {
+    padding: 0 20px;
+}
+
 .infinity-right {
     text-align: right;
+}
+
+.infinity-right .infinity-input-wrapper {
+    padding: 0 0 0 20px;
 }
 
 .infinity-clear {

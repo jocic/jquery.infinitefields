@@ -109,8 +109,12 @@
                 
                 $("#example-3 .container").infinity({
                     fields : [
-                        { title : "Name", type : "input", size : "3" },
-                        { title : "Description", type : "textarea", size : "9" }
+                        { title : "Product", type : "input", size : "3" },
+                        { title : "Description", type : "textarea", size : "7" },
+                        { title : "Shipping", type : "select", size : "2", options : [
+                            { text : "Included", value : "Yes"  },
+                            { text : "Excluded", value : "No" }
+                        ] }
                     ]
                 });
                 

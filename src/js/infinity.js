@@ -1,7 +1,7 @@
 /**************************************************\
 |* Script Author: Djordje Jocic                   *|
 |* Script Year: 2016                              *|
-|* Script Version: 1.0.0                          *|
+|* Script Version: 1.0.1                          *|
 |* Script License: MIT License (MIT)              *|
 |* ============================================== *|
 |* Official Website: http://www.djordjejocic.com/ *|
@@ -74,7 +74,7 @@ function InfinityRenderer() {
         
         $.each(settings.fields, function(index, value) {
             
-            fields += "<div class='infinity-col-" + value.size + "'><div class='infinity-input-wrapper'>" + that.createInput(value.type) + "</div></div>";
+            fields += "<div class='infinity-col-" + value.size + "'><div class='infinity-input-wrapper'>" + that.createInput(value) + "</div></div>";
             
         });
         
@@ -98,15 +98,28 @@ function InfinityRenderer() {
         
     };
     
-    this.createInput = function(inputType) {
+    this.createInput = function(inputParameters) {
         
-        if (inputType === "textarea") {
+        if (inputParameters.type === "textarea") {
             
             return "<textarea class='infinity-object infinity-textarea'></textarea>";
             
         }
+        else if (inputParameters.type === "select") {
+            
+            var options = "";
+            
+            $.each(inputParameters.options, function(index, param) {
+                
+                options += "<option value='" + param.value + "'>" + param.text + "</option>";
+                
+            });
+            
+            return "<select class='infinity-object'>" + options + "</select>";
+            
+        }
         
-        return "<input class='infinity-object infinity-input' />";
+        return "<input class='infinity-object infinity-input' type='text' />";
     };
     
     this.handleValues = function(element, settings) {
