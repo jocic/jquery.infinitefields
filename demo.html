@@ -56,8 +56,6 @@
             
             $(document).ready(function() {
                 
-                // Initialization Example.
-                
                 $("#example-1 .container").infinity();
                 
             });
@@ -79,12 +77,21 @@
         
         <script type="text/javascript">
             
-            
+            $(document).ready(function() {
+                
+                $("#example-2 .container").infinity({
+                    fields : [
+                        { title : "Name", type : "input", size : "9" },
+                        { title : "Price", type : "input", size : "3" }
+                    ]
+                });
+                
+            });
             
         </script>
         
         <div id="example-2" class="example">
-            <h1 class="title">Example 2</h1>
+            <h1 class="title">Example 2 - Multiple Fields</h1>
             <div class="parse-options">
                 Parse Options
                 <button class="parse" data-option="txt">TXT</button>
@@ -100,14 +107,19 @@
             
             $(document).ready(function() {
                 
-                
+                $("#example-3 .container").infinity({
+                    fields : [
+                        { title : "Name", type : "input", size : "3" },
+                        { title : "Description", type : "textarea", size : "9" }
+                    ]
+                });
                 
             });
             
         </script>
         
         <div id="example-3" class="example">
-            <h1 class="title">Example 3</h1>
+            <h1 class="title">Example 3 - Different Field Types</h1>
             <div class="parse-options">
                 Parse Options
                 <button class="parse" data-option="txt">TXT</button>
@@ -123,14 +135,94 @@
             
             $(document).ready(function() {
                 
-                
+                $("#example-4 .container").infinity({
+                    fields : [
+                        { title : "Product Name", type : "input", size : "12" }
+                    ],
+                    values : [
+                        "Galaxy S5 G900F BL",
+                        "Desire 620G DS GR",
+                        "LED LCD 43AF1000",
+                        "LED LCD 24AR2000",
+                        "YotaPhone 2 YD201 BLACK"
+                    ]
+                });
                 
             });
             
         </script>
         
         <div id="example-4" class="example">
-            <h1 class="title">Example 4</h1>
+            <h1 class="title">Example 4 - Preset Values (Basic)</h1>
+            <div class="parse-options">
+                Parse Options
+                <button class="parse" data-option="txt">TXT</button>
+                <button class="parse" data-option="json">JSON</button>
+                <button class="parse" data-option="xml">XML</button>
+            </div>
+            <div class="container"></div>
+        </div>
+        
+        <!-- Example 5 Starts Here -->
+        
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                
+                $("#example-5 .container").infinity({
+                    fields : [
+                        { title : "First Name", type : "input", size : "4" },
+                        { title : "Middle Name", type : "input", size : "4" },
+                        { title : "Last Name", type : "input", size : "4" }
+                    ],
+                    values : [
+                        [ "Suzanne", "Jay", "Morgan" ],
+                        [ "Faith", "Julio", "Freeman" ],
+                        [ "Merle", "Doreen", "Brock" ]
+                    ]
+                });
+                
+            });
+            
+        </script>
+        
+        <div id="example-5" class="example">
+            <h1 class="title">Example 5 - Preset Values (Advanced)</h1>
+            <div class="parse-options">
+                Parse Options
+                <button class="parse" data-option="txt">TXT</button>
+                <button class="parse" data-option="json">JSON</button>
+                <button class="parse" data-option="xml">XML</button>
+            </div>
+            <div class="container"></div>
+        </div>
+        
+        <!-- Example 6 Starts Here -->
+        
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                
+                $("#example-6 .container").infinity({
+                    fields : [
+                        { title : "Fruit", type : "input", size : "12" }
+                    ],
+                    values : [
+                        "Banana",
+                        "Pineapple",
+                        "Lemon",
+                        "Orange"
+                    ],
+                    inputs : { id : "fruit", align : "center" },
+                    options : { title : "Fruit Options", size : "3", align : "center" }
+                });
+                
+            });
+            
+        </script>
+        
+        <div id="example-6" class="example">
+            <h1 class="title">Example 6 - Custom Settings</h1>
             <div class="parse-options">
                 Parse Options
                 <button class="parse" data-option="txt">TXT</button>

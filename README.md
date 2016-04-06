@@ -1,6 +1,6 @@
-# JQuery Infinity
+# jQuery Infinity
 
-JQuery library that allows users to add infinite number of input fields.
+jQuery Infinity is a library that allows users to add and process infinite number of input fields.
 
 # Versioning Scheme
 
@@ -12,14 +12,27 @@ I use a 3-digit version identifier, for example 1.0.1. These digits have the fol
 
 # Examples
 
-I will not add examples until releasing the first version.
+Before using the library you have to upload the files from the "src" folder to your server and add the library to your project.
 
-                settings = {
-                    fields : [
-                        { title : "Input", type : "input", size : "12" }
-                    ],
-                    values : [
-                    ],
-                    inputs : { id : "infinity", align : "left" },
-                    options : { title : "Options", size : "3", align : "left" }
-                };
+```html
+<link href="src/css/infinity.css" rel="stylesheet" type="text/css" />
+<script src="src/js/infinity.js" type="text/javascript"></script>
+```
+
+Be sure to check out the demo if you are confused.
+
+# Settings
+
+Default library settings is as follows.
+
+```json
+{
+    fields : [
+        { title : "Input", type : "input", size : "12" }
+    ],
+    values : [
+    ],
+    inputs : { id : "infinity", align : "left" },
+    options : { title : "Options", size : "3", align : "left" }
+}
+```

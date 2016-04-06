@@ -16,14 +16,17 @@
 }
 
 .infinity-input-wrapper {
-    padding: 0 10px 0 0;
+    padding: 0 20px 0 0;
 }
 
 .infinity-btn {
+    background: none;
     height: 14px;
     width: 14px;
     display: inline-block;
     margin: 5px 5px 0 0;
+    padding: 0;
+    border: none;
     cursor: pointer;
 }
 
@@ -50,7 +53,7 @@
 }
 
 input.infinity-object {
-    width: 95%;
+    width: 100%;
 }
 
 textarea.infinity-object {

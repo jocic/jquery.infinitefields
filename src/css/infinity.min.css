@@ -1,0 +1,7 @@
+/**************************************************\
+|* Style Author: Djordje Jocic                    *|
+|* Style Year: 2016                               *|
+|* Official Website: http://www.djordjejocic.com/ *|
+\**************************************************/
+
+.infinity-header{font-weight:bold;margin:0 0 5px 0}.infinity-row{margin:0 0 5px 0}.infinity-input-wrapper{padding:0 20px 0 0}.infinity-btn{background:0;height:14px;width:14px;display:inline-block;margin:5px 5px 0 0;padding:0;border:0;cursor:pointer}.infinity-btn:hover{opacity:.9}.infinity-btn-add{background:url(../img/buttons.png) 0 0 no-repeat}.infinity-btn-remove{background:url(../img/buttons.png) -14px 0 no-repeat}.infinity-object{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box}input.infinity-object{width:100%}textarea.infinity-object{width:95%;resize:vertical}.infinity-col-1{width:8.333333333%;float:left}.infinity-col-2{width:16.666666667%;float:left}.infinity-col-3{width:25%;float:left}.infinity-col-4{width:33.333333333%;float:left}.infinity-col-5{width:41.666666667%;float:left}.infinity-col-6{width:50%;float:left}.infinity-col-7{width:58.333333333%;float:left}.infinity-col-8{width:66.666666667%;float:left}.infinity-col-9{width:75%;float:left}.infinity-col-10{width:83.333333333%;float:left}.infinity-col-11{width:91.666666667%;float:left}.infinity-col-12{width:100%;float:left}.infinity-left{text-align:left}.infinity-center{text-align:center}.infinity-right{text-align:right}.infinity-clear{clear:both}

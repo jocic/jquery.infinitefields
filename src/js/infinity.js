@@ -74,7 +74,7 @@ function InfinityRenderer() {
         
         $.each(settings.fields, function(index, value) {
             
-            fields += "<div class='infinity-col-" + value.size + "'>" + that.createInput(value.type) + "</div>";
+            fields += "<div class='infinity-col-" + value.size + "'><div class='infinity-input-wrapper'>" + that.createInput(value.type) + "</div></div>";
             
         });
         
