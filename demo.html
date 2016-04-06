@@ -23,9 +23,31 @@
         
         <!-- Output Starts Here -->
         
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                
+                // Parsing Example.
+                
+                $(".parse").click(function() {
+                    
+                    var parseOption   = $(this).data("option");
+                    var container     = $(this).parent().parent().children(".container");
+                    var parsingResult = container.infinityParse(parseOption);
+                    
+                    $("#output .result").html(parsingResult);
+                    
+                    window.scrollTo(0, 0);
+                    
+                });
+                
+            });
+            
+        </script>
+        
         <div id="output" class="example no-margin">
             <h1>Parsing Output</h1>
-            <textarea class="result" disabled></textarea>
+            <textarea class="result"></textarea>
         </div>
         
         <!-- Example 1 Starts Here -->
@@ -38,20 +60,12 @@
                 
                 $("#example-1 .container").infinity();
                 
-                // Parsing Example.
-                
-                $("#example-1 .parse").click(function() {
-                    
-                    var parseOption = $(this).data("option");
-                    
-                });
-                
             });
             
         </script>
         
         <div id="example-1" class="example">
-            <h1 class="title">Example 1</h1>
+            <h1 class="title">Example 1 - Basic</h1>
             <div class="parse-options">
                 Parse Options
                 <button class="parse" data-option="txt">TXT</button>

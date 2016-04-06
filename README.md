@@ -13,3 +13,13 @@ I use a 3-digit version identifier, for example 1.0.1. These digits have the fol
 # Examples
 
 I will not add examples until releasing the first version.
+
+                settings = {
+                    fields : [
+                        { title : "Input", type : "input", size : "12" }
+                    ],
+                    values : [
+                    ],
+                    inputs : { id : "infinity", align : "left" },
+                    options : { title : "Options", size : "3", align : "left" }
+                };

@@ -94,7 +94,7 @@ function InfinityRenderer() {
                       "<div class='infinity-clear'></div>" +
                   "</div>";
         
-        element.append(row);
+        element.children().eq(position).after(row);
         
     };
     
@@ -109,13 +109,152 @@ function InfinityRenderer() {
         return "<input class='infinity-object infinity-input' />";
     };
     
-    this.handleValues = function() {
+    this.handleValues = function(element, settings) {
         
+        var that = this;
         
+        $.each(settings.values, function(rIndex, rValue) {
+            
+            // Process Values.
+            
+            if (!(rValue instanceof Array)) {
+                
+                rValue = [
+                    rValue
+                ];
+                
+            }
+            
+            // Add New Row - If Needed.
+            
+            if (rIndex > 0) {
+                
+                that.addRow(rIndex, element, settings);
+                
+            }
+            
+            // Set Values.
+            
+            $.each(rValue, function(cIndex, cValue) {
+                
+                element.children(".infinity-row").eq(rIndex).find(".infinity-object").eq(cIndex).val(cValue);
+                
+            });
+            
+        });
+        
+    };
+    
+    this.handleObjects = function(element, settings) {
+        
+        element.find(".infinity-row").each(function(rIndex, rValue) {
+            
+            $(this).find(".infinity-object").each(function(cIndex, cValue) {
+                
+                var objectName = settings.inputs.id + "[" + rIndex + "][" + cIndex + "]";
+                
+                $(this).attr("name", objectName);
+                
+            });
+            
+        });
         
     };
     
 }
+
+function InfinityParser() {
+    
+    this.toTXT = function(element) {
+        
+        var result = "";
+        var line   = "";
+        
+        element.find(".infinity-row").each(function(rIndex, rValue) {
+            
+            line = "";
+            
+            $(this).find(".infinity-object").each(function(cIndex, cValue) {
+                
+                line += $(this).val() + " ";
+                
+            });
+            
+            result += line.trim() + "\n";
+            
+        });
+        
+        return result;
+        
+    };
+    
+    this.toJSON = function(element) {
+        
+        var result = [ ];
+        var row    = [ ];
+        
+        element.find(".infinity-row").each(function(rIndex, rValue) {
+            
+            row = [ ];
+            
+            $(this).find(".infinity-object").each(function(cIndex, cValue) {
+                
+                row.push($(this).val());
+                
+            });
+            
+            if (row.length === 1) {
+                
+                row = row[0];
+                
+            }
+            
+            result.push(row);
+            
+        });
+        
+        return JSON.stringify(result);
+        
+    };
+    
+    this.toXML = function(element) {
+        
+        var result = "<xml>";
+        var row    = [ ];
+        var temp   = null;
+        
+        element.find(".infinity-row").each(function(rIndex, rValue) {
+            
+            temp = $(this).find(".infinity-object");
+            
+            row = "<row-" + (rIndex + 1) + ">";
+            
+            $.each(temp, function(cIndex, cValue) {
+                
+                if (temp.length === 1) {
+                    
+                    row += $(this).val();
+                    
+                }
+                else {
+                    
+                    row += "<col-" + (cIndex + 1) + ">" + $(this).val() + "</col-" + (cIndex + 1) + ">";
+                    
+                }
+                
+            });
+            
+            row += "</row-" + (rIndex + 1) + ">";
+            
+            result += row;
+            
+        });
+        
+        return result + "</xml>";
+        
+    };
+    
+};
 
 // Extending JQuery.
 
@@ -124,7 +263,8 @@ function InfinityRenderer() {
     // Data Needed For The Library To Work.
     
     $.fn.infinityCore = {
-        renderer : new InfinityRenderer()
+        renderer : new InfinityRenderer(),
+        parser : new InfinityParser()
     };
     
     // JQuery Infinity Function (Used For Initialization).
@@ -140,20 +280,45 @@ function InfinityRenderer() {
         
         if (typeof elementSettings === "undefined") {
             
-            if (typeof settings === "undefined") { // Generate Default Settings.
+            // Check Settings.
+            
+            if (typeof settings === "undefined") {
                 
-                settings = {
-                    fields : [
-                        { title : "Input", type : "input", size : "12" }
-                    ],
-                    inputs : { align : "left" },
-                    options : { title : "Options", size : "3", align : "left" }
-                };
+                settings = { };
                 
             }
-            else { // Check Provided Settings.
+              
+            // Check Fields.
+            
+            if (typeof settings.fields === "undefined") {
                 
+                settings.fields = [
+                    { title : "Input", type : "input", size : "12" }
+                ];
                 
+            }
+            
+            // Check Values.
+            
+            if (typeof settings.values === "undefined") {
+                
+                settings.values = [ ];
+                
+            }
+            
+            // Check Inputs.
+            
+            if (typeof settings.inputs === "undefined") {
+                
+                settings.inputs = { id : "infinity", align : "left" };
+                
+            }
+            
+            // Check Options.
+            
+            if (typeof settings.options === "undefined") {
+                
+                settings.options = { title : "Options", size : "3", align : "left" };
                 
             }
             
@@ -173,19 +338,35 @@ function InfinityRenderer() {
             
             $.fn.infinityCore.renderer.addHeader(element, elementSettings);
             $.fn.infinityCore.renderer.addRow(0, element, elementSettings);
+            $.fn.infinityCore.renderer.handleValues(element, elementSettings);
+            $.fn.infinityCore.renderer.handleObjects(element, elementSettings);
             
             // Add Required Events.
             
             element.on("click", ".infinity-btn-add", function(e) {
                 
+                var rowPosition = $(this).parent().parent().index();
                 
+                $.fn.infinityCore.renderer.addRow(rowPosition, element, elementSettings);
+                $.fn.infinityCore.renderer.handleObjects(element, settings);
                 
                 e.preventDefault();
                 
             });
+            
             element.on("click", ".infinity-btn-remove", function(e) {
                 
+                var row       = $(this).parent().parent();
+                var container = row.parent();
+                var rowNumber = container.children(".infinity-row").length;
                 
+                if (rowNumber > 1) {
+                    
+                    row.remove();
+                    
+                }
+                
+                $.fn.infinityCore.renderer.handleObjects(element, settings);
                 
                 e.preventDefault();
                 
@@ -201,219 +382,41 @@ function InfinityRenderer() {
         
     };
     
-    $.fn.infinityOld = function(settings) {
-        
-        // Get Element & Element Settings.
-        
-        var element         = $(this);
-        var elementSettings = $(this).data("infinitySettings");
-        
-        // If Settings Not Available, Generate Default Settings.
-        
-        if (typeof elementSettings === "undefined" && typeof settings === "undefined") {
-            
-            settings = {
-                rowClass : ".infinity-row",
-                inputClass : ".infinity-input",
-                addClass : ".infinity-btn-add",
-                removeClass : ".infinity-btn-remove",
-                fieldName : "infinity",
-                fields : [
-                ],
-                fieldCount : 0,
-                headerTemplate : "<div class='infinity-header'>" +
-                                     "<div class='infinity-col-6'>Name</div>" +
-                                     "<div class='infinity-col-3'>Price</div>" +
-                                     "<div class='infinity-col-3'>Options</div>" +
-                                     "<div class='infinity-clear'></div>" +
-                                 "</div>",
-                rowTempalte : "<div class='infinity-row'>" +
-                                  "<div class='infinity-col-6'>" +
-                                      "<div class='infinity-input-wrapper'><input class='infinity-input' /></div>" +
-                                  "</div>" +
-                                  "<div class='infinity-col-3'>" +
-                                      "<div class='infinity-input-wrapper'><input class='infinity-input' /></div>" +
-                                  "</div>" +
-                                  "<div class='infinity-col-3'>" +
-                                      "<a class='infinity-btn infinity-btn-add' title='Add' href='#'></a>" +
-                                      "<a class='infinity-btn infinity-btn-remove' title='Remove' href='#'></a>" +
-                                      "<div cass='infinity-clear'></div>" +
-                                  "</div>" +
-                                  "<div class='infinity-clear'></div>" +
-                              "</div>"
-            };
-            
-        }
-        else {
-            
-            settings = elementSettings;
-            
-        }
-        
-        // Create Initial Content.
-        
-        element.append(settings.headerTemplate);
-        
-        if (settings.fields.length === 0) {
-            
-            element.append(settings.rowTempalte);
-            
-        }
-        else {
-            
-            $(settings.fields).each(function(index, value) {
-                element.append(settings.rowTempalte);
-            });
-            
-        }
-        
-        // Process Initial Content.
-        
-        element.find(settings.rowClass).each(function(rIndex, rValue) {
-            
-            $(this).find(settings.inputClass).each(function(iIndex, iValue) {
-                
-                $(this).attr("name", settings.fieldName + "[" + rIndex + "][" + iIndex + "]");
-                
-                if (typeof settings.fields[rIndex] === "undefined" || typeof settings.fields[rIndex][iIndex] === "undefined") {
-                    
-                    settings.fields[rIndex] = [
-                        "",
-                        ""
-                    ];
-                    
-                }
-                else {
-                    
-                    $(this).attr("value", settings.fields[rIndex][iIndex]);
-                    
-                }
-                
-            });
-            
-        });
-        
-        // Add Events.
-        
-        element.on("click", settings.addClass, function() {
-            
-            element.append(settings.rowTempalte);
-            
-            settings.fields.push([
-                "",
-                ""
-            ]);
-            
-            element.find(settings.rowClass).each(function(rIndex, rValue) {
-                
-                $(this).find(settings.inputClass).each(function(iIndex, iValue) {
-                    
-                    $(this).attr("name", settings.fieldName + "[" + rIndex + "][" + iIndex + "]");
-                    
-                    if (typeof settings.fields[rIndex] !== "undefined" && typeof settings.fields[rIndex][iIndex] !== "undefined") {
-                        
-                        $(this).attr("value", settings.fields[rIndex][iIndex]);
-                        
-                    }
-                    
-                });
-                
-            });
-            
-            element.data("infinitySettings", settings);
-            
-        });
-        
-        element.on("click", settings.removeClass, function() {
-            
-            if (settings.fields.length > 1) {
-                
-                var container = $(this).parent().parent();
-                var index     = container.index() - 1;
-                
-                container.remove();
-                
-                settings.fields.splice(index, 1);
-                
-            }
-            
-            element.find(settings.rowClass).each(function(rIndex, rValue) {
-                
-                $(this).find(settings.inputClass).each(function(iIndex, iValue) {
-                    
-                    $(this).attr("name", settings.fieldName + "[" + rIndex + "][" + iIndex + "]");
-                    
-                    if (typeof settings.fields[rIndex] !== "undefined" && typeof settings.fields[rIndex][iIndex] !== "undefined") {
-                        
-                        $(this).attr("value", settings.fields[rIndex][iIndex]);
-                        
-                    }
-                    
-                });
-                
-            });
-            
-            element.data("infinitySettings", settings);
-            
-        });
-        
-        
-        // Set Initiated Flag & Save Settings.
-        
-        settings.infinityInit = true;
-        
-        element.data("infinitySettings", settings);
-        
-    };
-    
     // JQuery Infinity Parse Function (Used For Parsing The Fields To Text, JSON).
     
-    $.fn.infinityParse = function(parseType) {
+    $.fn.infinityParse = function(parseType, customParser) {
         
         // Get Element & Element Settings.
         
         var element         = $(this);
         var elementSettings = $(this).data("infinitySettings");
-        var results         = "";
         
-        // Parse Fields.
+        // Parse Element.
         
-        $(elementSettings.fields).each(function(rIndex, rValue) {
+        if (typeof customParser === "undefined") {
             
-            var line = "";
-            
-            $(rValue).each(function(iIndex, iValue) {
+            if (parseType === "txt") {
                 
-                if (parseType === "text") {
-                    
-                    if (iIndex == 1) {
-                        
-                        iValue += "£";
-                        
-                    }
-                    
-                    line += iValue + " ";
-                    
-                }
+                return $.fn.infinityCore.parser.toTXT(element);
                 
-            });
-            
-            if (parseType === "text") {
+            }
+            else if (parseType === "json") {
                 
-                results += line.trim() + "\n";
+                return $.fn.infinityCore.parser.toJSON(element);
+                
+            }
+            else if (parseType == "xml") {
+                
+                return $.fn.infinityCore.parser.toXML(element);
                 
             }
             
-        });
-        
-        if (parseType === "text") {
-            
-            return results;
+            return $.fn.infinityCore.parser.toTXT(element);
             
         }
         else {
             
-            return JSON.stringify(elementSettings.fields);
+            return customParser;
             
         }
         
