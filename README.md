@@ -4,11 +4,11 @@ jQuery Infinity is a library that allows users to add and process infinite numbe
 
 ![Basic Example](demo/img/example.gif)
 
-Library used with jsGrid.
+Library can be easily used with other libraries, like for example jsGrid.
 
 ![jsGrid Example](demo/img/jsgrid-example.png)
 
-Library allows you to parse the fields to:
+Field values can be easily parsed to:
 
 * Plaintext
 * JSON
