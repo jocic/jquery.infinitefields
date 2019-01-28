@@ -16,13 +16,15 @@ Field values can be easily parsed to:
 
 It is also possible to write and use custom parsing functions.
 
-# Versioning Scheme
+## Versioning Scheme
 
-I use a 3-digit version identifier, for example 1.0.1. These digits have the following meaning:
+I use a 3-digit [Semantic Versioning](https://semver.org/spec/v2.0.0.html) identifier, for example 1.0.2. These digits have the following meaning:
 
-* The first digit (1) specifies the major version number.
-* The second digit (0) specifies the minor version number.
-* The third digit (1) specifies the patch version number.
+*   The first digit (1) specifies the MAJOR version number.
+*   The second digit (0) specifies the MINOR version number.
+*   The third digit (2) specifies the PATCH version number.
+
+Complete documentation can be found by following the link above.
 
 # Examples
 
@@ -170,3 +172,32 @@ Allowed values are as follow:
     * object.title - Any string
     * object.size - String or a number from 1 to 12 since Infinity uses a 12 grid layout
     * object.align - String with value *left*, *center* or *right*
+
+## Contribution
+
+Please review the following documents if you are planning to contribute to the project:
+
+*   [Contributor Covenant Code of Conduct](code-of-conduct.md)
+*   [Contribution Guidelines](contributing.md)
+*   [Pull Request Template](pull-request-template.md)
+*   [MIT License](license.md)
+
+## Integration
+
+My hourly rate is fairly reasonable so, if you need help with integrating **Infinity** to your existing project, feel free to contact me via the email address below.
+
+Integration inquiries: [office@djordjejocic.com](mailto:office@djordjejocic.com)
+
+## Support
+
+Please don't hesitate to contact me if you have any questions, ideas, or concerns.
+
+My Twitter account is: [@jocic_91](https://www.twitter.com/jocic_91)
+
+My support E-Mail address is: [support@djordjejocic.com](mailto:support@djordjejocic.com)
+
+## Copyright & License
+
+Copyright (C) 2016 Đorđe Jocić
+
+Licensed under the MIT license.
